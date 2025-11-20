@@ -8,8 +8,8 @@ Basic structure where elements that created in React insert.
 - **Concept:**
  All react elements are rendered inside the specific container in the HTML file.
 
-    Virtual DOM vs Real DOM
-    Q. Do React elements go directly to the browser's DOM?
+  ### Virtual DOM vs Real DOM
+  **Q. Do React elements go directly to the browser's DOM?**
 
     - **Answer:** No. They go to the **Virtual DOM** first.
     - **Process:**
