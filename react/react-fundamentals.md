@@ -55,3 +55,8 @@ Modern UI development concept.
 - **Memo:**
  It does't create huge one file, it approaches to create small lego such as `Header`, `Footer` and `Button`.
 
+---
+
+## Resources
+- [📝 Self-Check Quiz (Gemini Share)](https://gemini.google.com/share/4405d6443619)
+
