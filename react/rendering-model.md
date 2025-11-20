@@ -14,7 +14,7 @@
 
 ## 3. Legacy vs. Concurrent Rendering (React 18)
 - **React 17 (Legacy):** Blocking rendering. Once updates start, they cannot be interrupted. (Can cause UI freezing).
-- **React 18 (Concurrent):** Introduced `createRoot()`. Rendering is **interruptible**.
+- **React 18 (Concurrent):** Introduced `createRoot()`. Rendering is **interruptible** (中断可能な).
     - High priority tasks (user input) can pause low priority tasks (heavy rendering).
     - Keeps the app responsive even during heavy updates.
 
