@@ -14,7 +14,7 @@
 
 ## 3. Legacy vs. Concurrent Rendering (React 18)
 - **React 17 (Legacy):** Blocking rendering. Once updates start, they cannot be interrupted. (Can cause UI freezing).
-- **React 18 (Concurrent):** Introduced `createRoot()`. Rendering is **interruptible**.
+- **React 18 (Concurrent):** Introduced `createRoot()`. Rendering is **interruptible** (中断可能な).
     - High priority tasks (user input) can pause low priority tasks (heavy rendering).
     - Keeps the app responsive even during heavy updates.
 
@@ -72,3 +72,11 @@ Reactは以下の順序でFiberノード（作業単位）を処理する。
 2.  キー入力処理（高優先度）を先に実行して画面に反映。
 3.  終わったら `C` から作業を再開する。
 → これが「アプリが固まらない」理由。
+
+### 🇯🇵 Memo: Why two phases?
+- **Render Phase (計算フェーズ):**
+  - **「厨房での下準備」**。Reactがメモリ上で「次はどう描画するか」を計算している状態。
+  - ユーザーにはまだ見えていないため、重ければ**途中で休憩したり、緊急の用事（キー入力）を先に片付けても問題ない**（＝Interruptible）。
+- **Commit Phase (反映フェーズ):**
+  - **「客席への配膳」**。実際にブラウザのDOMを書き換える瞬間。
+  - ここで止まると、ユーザーは「半分だけ更新された中途半端な画面」を見ることになってしまう。だから、**一度書き換え始めたら、最後まで一気にやり切る必要がある**（＝Uninterruptible）。
