@@ -81,10 +81,6 @@ Understanding these distinctions prevents confusion during tool selection.
 - [ ] GitHub Actions → SonarCloud integration
 - [ ] npm audit → Implement `npm audit --audit-level=high` in pipeline
 
-### C. Evaluate SAST applicability to Mira project
-
-- [ ] Assess whether SonarCloud can be applied to Mira project
-
 ---
 
 ## 6. Key Takeaway
