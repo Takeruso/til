@@ -1,40 +1,95 @@
-# Security Tools Classification (SAST, SCA, DAST)
+# 📝 TIL — Security Tool Classification (SAST / SCA / DAST)
 
-## 1. What I Learned Today (Abstract)
-Security-related tools can be organized into three categories: **SAST, SCA, and DAST**.
+## 1. What I Learned (Abstract)
 
-## 2. Concrete Examples
+Security tools fall into three fundamentally different categories:
+- **SAST** (code analysis)
+- **SCA** (dependency analysis)  
+- **DAST** (runtime attack testing)
 
-### SAST (Static Application Security Testing)
-- **Purpose**: Static analysis of vulnerabilities in code itself
-- **Tool Examples**: SonarCloud, CodeQL
-- **Hands-on Experience**: ✅ **Quite easy to implement**
+Understanding these distinctions prevents confusion during tool selection.
 
-### SCA (Software Composition Analysis)
-- **Purpose**: Check for known vulnerabilities in dependent packages
-- **Tool Examples**: Snyk, npm audit
-- **Hands-on Experience**: ✅ **Simple - just run `npm install`**
+---
 
-### DAST (Dynamic Application Security Testing)
-- **Purpose**: Attack testing from external perspective by running the application
-- **Tool Examples**: OWASP ZAP
-- **Hands-on Experience**: ❌ **Difficult to set up**
+## 2. Concrete Understanding (Examples & My Notes)
 
-## 3. Why It Matters (Practical Value)
+### 🔹 SAST — Static Analysis of Source Code
 
-- Different tools have different implementation complexities, enabling project-specific selection
-- Avoids the misconception that **"running npm audit = secure"**
-- Helps identify which category a feature-rich tool belongs to when evaluating new solutions
+**Purpose:** Detect vulnerabilities directly in the code logic
 
-## 4. Implementation-Level Insights (New)
+**Tools:** SonarCloud, CodeQL
 
-| Tool | Ease of Implementation | Notes |
-|------|----------------------|-------|
-| SonarCloud | Easy | Can be automated after initial setup |
-| npm audit | Easy | Already integrated into `npm install` workflow |
-| OWASP ZAP | Difficult | Requires separate environment setup; needs thoughtful configuration |
+**My Observation:**
+- ✅ Lightweight configuration and naturally integrates into CI/CD
+- ✅ Easiest to adopt for individual developers and small teams
 
-## 5. Next Actions
-- [ ] Investigate what made OWASP ZAP difficult to implement
-- [ ] Integrate SonarCloud/npm audit into CI/CD pipeline
-- [ ] Review documentation to lower DAST adoption barriers
+---
+
+### 🔹 SCA — Dependency Vulnerability Analysis
+
+**Purpose:** Detect known CVE vulnerabilities in packages
+
+**Tools:** Snyk, npm audit
+
+**My Observation:**
+- ✅ Can be checked immediately during `npm install` workflow with near-zero implementation cost
+- ✅ Especially critical for JavaScript projects with heavy external dependencies
+
+---
+
+### 🔹 DAST — Runtime Attack Simulation
+
+**Purpose:** Attack the running app to verify real exploitability
+
+**Tools:** OWASP ZAP
+
+**My Observation:**
+- ❌ Heavy setup and difficult to use without prior knowledge
+- ❌ Requires mock/test environment preparation, resulting in high overhead
+
+---
+
+## 3. Why This Matters
+
+1. **Prevents misconception:** Avoid the false belief that "npm audit alone ensures security"
+2. **Enables comparison:** Understanding which category each tool belongs to makes comparison easier
+3. **Improves decision-making:** Can determine which tools to incorporate into CI/CD pipelines in the future
+
+---
+
+## 4. Implementation Insights
+
+| Tool | Implementation Difficulty | Notes |
+|------|--------------------------|-------|
+| SonarCloud | Easy | Continuous analysis runs automatically once integrated into CI/CD |
+| npm audit | Very Easy | Built into npm workflow |
+| OWASP ZAP | Hard | Requires extensive preparation (scan target URL, authentication, mode settings, etc.) |
+
+---
+
+## 5. Next Actions (Concrete Improvement Plan)
+
+### A. Break down why DAST (ZAP) was difficult
+
+- [ ] ① Identify scan target pages
+- [ ] ② Handle authentication (login state)
+- [ ] ③ Understand container version vs CLI version differences
+- → Retry after separating these concerns
+
+### B. Integrate SAST + SCA into pokemon-trainer-hub CI
+
+- [ ] GitHub Actions → SonarCloud integration
+- [ ] npm audit → Implement `npm audit --audit-level=high` in pipeline
+
+### C. Evaluate SAST applicability to Mira project
+
+- [ ] Assess whether SonarCloud can be applied to Mira project
+
+---
+
+## 6. Key Takeaway
+
+The three-category framework (SAST/SCA/DAST) provides a clear mental model for:
+- Understanding tool capabilities at a glance
+- Making informed decisions about which tools to implement
+- Avoiding false confidence from partial security measures
